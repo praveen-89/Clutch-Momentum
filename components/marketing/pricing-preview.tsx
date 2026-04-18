@@ -56,9 +56,12 @@ export function PricingPreview() {
     <section id="pricing" className="py-24 bg-white/5 border-y border-white/5">
       <div className="max-w-7xl mx-auto px-6">
         <div className="text-center space-y-4 mb-20">
-          <h2 className="text-3xl lg:text-5xl font-bold tracking-tight">Flexible Plans for Every Stage</h2>
-          <p className="text-lg text-foreground/50 max-w-2xl mx-auto">
-            Choose the plan that fits your collaboration goals. Registration is always free.
+          <h2 className="text-3xl lg:text-7xl font-black italic uppercase tracking-tighter leading-none">
+            Flexible Plans <br />
+            <span className="text-primary text-glow">For Every Stage</span>
+          </h2>
+          <p className="text-lg text-foreground/70 max-w-2xl mx-auto font-medium">
+            Choose the elite plan that fits your collaboration goals. Registration is always free.
           </p>
         </div>
 
@@ -86,10 +89,10 @@ export function PricingPreview() {
                 <div className="space-y-4 mb-8">
                   <h3 className="text-2xl font-bold">{plan.name}</h3>
                   <div className="flex items-baseline gap-1">
-                    <span className="text-4xl font-extrabold">{plan.price}</span>
-                    <span className="text-foreground/50 font-medium">/month</span>
+                    <span className="text-5xl font-black italic tracking-tighter">{plan.price}</span>
+                    <span className="text-foreground/60 font-bold uppercase text-xs tracking-widest">/ month</span>
                   </div>
-                  <p className="text-sm text-foreground/60">{plan.description}</p>
+                  <p className="text-sm text-foreground/70 font-medium leading-relaxed">{plan.description}</p>
                 </div>
 
                 <div className="p-4 rounded-xl bg-primary/10 border border-primary/20 mb-8 flex items-center justify-between">

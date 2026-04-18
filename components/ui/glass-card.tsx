@@ -19,9 +19,9 @@ export function GlassCard({
     <motion.div
       className={cn(
         "rounded-2xl border transition-all duration-300",
-        variant === "glass" && "bg-glass backdrop-blur-md border-glass-border shadow-lg",
-        variant === "frosted" && "bg-white/10 backdrop-blur-xl border-white/20 shadow-2xl",
-        variant === "solid" && "bg-card border-glass-border shadow-md",
+        variant === "glass" && "bg-glass/80 backdrop-blur-xl border-glass-border shadow-2xl hover:border-primary/30",
+        variant === "frosted" && "bg-white/10 backdrop-blur-2xl border-white/20 shadow-2xl ring-1 ring-white/10",
+        variant === "solid" && "bg-card backdrop-blur-md border-glass-border shadow-md",
         className
       )}
       {...props}

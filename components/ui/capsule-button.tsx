@@ -18,8 +18,8 @@ export function CapsuleButton({
   ...props
 }: CapsuleButtonProps) {
   const variants = {
-    primary: "bg-primary text-white shadow-[0_0_20px_rgba(37,99,235,0.3)] hover:shadow-[0_0_30px_rgba(37,99,235,0.5)]",
-    secondary: "bg-secondary text-white shadow-[0_0_20px_rgba(192,38,211,0.3)] hover:shadow-[0_0_30px_rgba(192,38,211,0.5)]",
+    primary: "bg-primary text-white shadow-[0_0_10px_rgba(249,115,22,0.2)] hover:shadow-[0_0_20px_rgba(249,115,22,0.4)]",
+    secondary: "bg-secondary text-black shadow-[0_0_10px_rgba(250,204,21,0.2)] hover:shadow-[0_0_20px_rgba(250,204,21,0.4)]",
     outline: "border-2 border-primary/50 text-primary hover:bg-primary/10",
     ghost: "text-foreground/70 hover:text-foreground hover:bg-white/5",
   };

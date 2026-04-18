@@ -5,24 +5,24 @@ export function Footer() {
     {
       title: "Product",
       links: [
-        { name: "Features", href: "/#features" },
-        { name: "Pricing", href: "/#pricing" },
-        { name: "Reach Out", href: "/#contact" },
+        { name: "Brand Access", href: "/dashboard" },
+        { name: "Pricing", href: "/pricing" },
+        { name: "Exclusive Leads", href: "/pricing" },
       ],
     },
     {
       title: "Company",
       links: [
-        { name: "About Us", href: "/#features" },
-        { name: "Support", href: "/#contact" },
-        { name: "Status", href: "#" },
+        { name: "About", href: "/about" },
+        { name: "Pricing", href: "/pricing" },
+        { name: "Contact", href: "/contact" },
       ],
     },
     {
       title: "Legal",
       links: [
-        { name: "Privacy Policy", href: "#" },
-        { name: "Terms of Service", href: "#" },
+        { name: "Privacy Policy", href: "/privacy" },
+        { name: "Terms & Conditions", href: "/terms" },
       ],
     },
   ];

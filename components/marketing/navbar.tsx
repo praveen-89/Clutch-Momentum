@@ -12,29 +12,28 @@ export function Navbar() {
   const backgroundColor = useTransform(
     scrollY,
     [0, 50],
-    ["rgba(255, 255, 255, 0)", "rgba(255, 255, 255, 0.4)"]
+    ["rgba(255, 255, 255, 0)", "rgba(255, 255, 255, 0.7)"]
   );
   const backdropFilter = useTransform(scrollY, [0, 50], ["blur(0px)", "blur(16px)"]);
   const [isOpen, setIsOpen] = useState(false);
 
   const navLinks = [
-    { name: "Features", href: "/#features" },
-    { name: "Pricing", href: "/#pricing" },
-    { name: "Connect", href: "/#contact" },
+    { name: "Home", href: "/" },
+    { name: "About", href: "/about" },
+    { name: "Pricing", href: "/pricing" },
+    { name: "How It Works", href: "/how-it-works" },
+    { name: "Contact", href: "/contact" },
   ];
 
   return (
     <motion.nav
       style={{ backgroundColor, backdropFilter }}
-      className="fixed top-0 left-0 right-0 z-50 border-b border-white/10 transition-colors duration-300"
+      className="fixed top-0 left-0 right-0 z-50 border-b border-transparent transition-all duration-300"
     >
       <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
         <Link href="/" className="flex items-center gap-2 group">
-          <div className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center text-white font-bold group-hover:rotate-12 transition-transform">
-            C
-          </div>
-          <span className="text-xl font-bold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-foreground to-foreground/60">
-            Clutch Momentum
+          <span className="text-xl font-extrabold tracking-tight">
+            <span className="text-primary">Clutch</span> Momentum
           </span>
         </Link>
 
@@ -44,17 +43,14 @@ export function Navbar() {
             <Link
               key={link.name}
               href={link.href}
-              className="text-sm font-medium text-foreground/70 hover:text-foreground transition-colors"
+              className="text-sm font-bold text-foreground/70 hover:text-primary transition-colors"
             >
               {link.name}
             </Link>
           ))}
-          <div className="h-4 w-px bg-foreground/10 mx-2" />
-          <Link href="/login" className="text-sm font-medium text-foreground/70 hover:text-foreground">
-            Login
-          </Link>
+          <div className="h-4 w-px bg-white/10 mx-2" />
           <Link href="/register">
-            <CapsuleButton>Join as Creator</CapsuleButton>
+            <CapsuleButton className="px-8">Get Started Free</CapsuleButton>
           </Link>
         </div>
 
@@ -75,15 +71,14 @@ export function Navbar() {
             <Link
               key={link.name}
               href={link.href}
-              className="text-lg font-medium"
+              className="text-lg font-bold"
               onClick={() => setIsOpen(false)}
             >
               {link.name}
             </Link>
           ))}
-          <Link href="/login" onClick={() => setIsOpen(false)}>Login</Link>
           <Link href="/register" onClick={() => setIsOpen(false)}>
-            <CapsuleButton className="w-full">Join as Creator</CapsuleButton>
+            <CapsuleButton className="w-full">Get Started Free</CapsuleButton>
           </Link>
         </motion.div>
       )}

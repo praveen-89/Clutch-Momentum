@@ -23,6 +23,7 @@ export function AdminSidebar() {
   const navItems = [
     { name: "Admin Dashboard", href: "/admin/dashboard", icon: BarChart3 },
     { name: "Manage Contacts", href: "/admin/manage-contacts", icon: Database },
+    { name: "Manage Brands", href: "/admin/manage-brands", icon: ShieldAlert },
     { name: "Manage Users", href: "/admin/manage-users", icon: Users },
     { name: "Subscriptions", href: "/admin/subscriptions", icon: CreditCard },
     { name: "Lead Requests", href: "/admin/exclusive-requests", icon: Zap },
