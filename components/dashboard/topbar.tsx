@@ -1,53 +1,60 @@
 "use client";
 
-import { Bell, Search, Sparkles, User } from "lucide-react";
+import { Bell, Search, ShieldCheck } from "lucide-react";
 import { useAuthStore } from "@/store/useAuthStore";
-import { cn } from "@/lib/utils";
 
 export function Topbar() {
   const { user } = useAuthStore();
 
   return (
-    <header className="h-20 border-b border-white/5 bg-background/50 backdrop-blur-xl px-8 flex items-center justify-between sticky top-0 z-40">
-      <div className="flex items-center gap-4 w-full max-w-md">
-        <div className="relative w-full group">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-foreground/30 group-focus-within:text-primary transition-colors" size={18} />
-          <input 
-            type="text" 
-            placeholder="Search brand contacts, industries..." 
-            className="w-full bg-white/5 border border-white/5 rounded-xl py-2.5 pl-10 pr-4 text-sm outline-none focus:border-primary/50 focus:ring-4 focus:ring-primary/10 transition-all"
-          />
+    <header className="h-20 border-b border-slate-200 px-10 flex items-center justify-between bg-white/40 backdrop-blur-2xl z-20 sticky top-0">
+      <div className="flex items-center gap-8">
+        <div className="space-y-1">
+            <h2 className="text-[10px] font-black uppercase tracking-[0.4em] text-slate-500 leading-none">
+            Network Sync: <span className="text-orange-600">Encrypted</span>
+            </h2>
+            <p className="text-lg font-black italic uppercase tracking-tighter text-slate-900 leading-none">
+                Creator Panel
+            </p>
+        </div>
+        <div className="h-8 w-px bg-slate-200" />
+        <div className="flex items-center gap-2 group cursor-pointer">
+           <div className="p-1.5 rounded-lg bg-orange-500/10 border border-orange-500/20 text-orange-600 group-hover:bg-orange-600 group-hover:text-white transition-all duration-300 shadow-sm">
+            <ShieldCheck size={16} />
+           </div>
+           <span className="text-[11px] font-black uppercase tracking-widest text-orange-600">Secure Instance Verified</span>
         </div>
       </div>
-
-      <div className="flex items-center gap-6">
-        <div className="hidden md:flex items-center gap-3 px-4 py-2 rounded-xl bg-primary/10 border border-primary/20">
-          <Sparkles size={16} className="text-primary" />
-          <div className="flex flex-col">
-            <span className="text-[10px] font-bold uppercase tracking-widest text-primary/70 leading-none mb-1">Available Credits</span>
-            <span className="text-sm font-black text-primary leading-none">{user?.credits ?? 0}</span>
-          </div>
+      
+      <div className="flex items-center gap-8">
+        <div className="hidden xl:flex items-center gap-3 px-5 py-2.5 rounded-2xl bg-white/50 border border-slate-200 text-[11px] font-black text-slate-500 uppercase tracking-widest hover:border-orange-500/50 transition-all cursor-pointer group shadow-sm">
+          <Search size={14} className="group-hover:text-orange-600 transition-colors" />
+          <span>Quick Database Search</span>
+          <kbd className="ml-4 px-1.5 py-0.5 rounded bg-slate-100 border border-slate-200 text-[9px] font-sans text-slate-500">Alt+K</kbd>
         </div>
+        
+        <div className="flex items-center gap-4">
+            <button className="relative p-3 rounded-2xl bg-white/50 border border-slate-200 text-slate-400 hover:text-orange-600 transition-all group shadow-sm">
+                <Bell size={20} />
+                <span className="absolute top-2.5 right-2.5 w-2 h-2 bg-orange-600 rounded-full shadow-[0_0_10px_rgba(249,115,22,0.4)] border-2 border-white group-hover:scale-110 transition-transform" />
+            </button>
+            
+            <div className="px-4 py-2 rounded-2xl bg-orange-50 border border-orange-100 flex items-center gap-3 group cursor-pointer hover:bg-white transition-all">
+                <div className="w-2.5 h-2.5 rounded-full bg-orange-500 shadow-[0_0_10px_rgba(249,115,22,0.2)]" />
+                <span className="text-[11px] font-black uppercase tracking-widest text-orange-600">{user?.credits} Credits Available</span>
+            </div>
 
-        <div className="flex items-center gap-3">
-          <button className="relative p-2 rounded-xl hover:bg-white/5 transition-colors text-foreground/50 hover:text-foreground">
-            <Bell size={20} />
-            <span className="absolute top-2 right-2 w-2 h-2 bg-primary rounded-full border-2 border-background" />
-          </button>
-          
-          <div className="h-8 w-px bg-white/5" />
-          
-          <div className="flex items-center gap-3 pl-2">
-            <div className="text-right hidden sm:block">
-              <p className="text-sm font-bold leading-none">{user?.name}</p>
-              <p className="text-[10px] text-foreground/40 mt-1 uppercase font-bold tracking-wider">{user?.plan} plan</p>
+            <div className="h-10 w-px bg-slate-200 mx-2" />
+            
+            <div className="flex items-center gap-4 group cursor-pointer">
+                <div className="text-right hidden sm:block">
+                    <p className="text-xs font-black uppercase tracking-tight text-slate-900 leading-none group-hover:text-orange-600 transition-colors">{user?.name}</p>
+                    <p className="text-[9px] text-orange-600/60 uppercase font-black mt-1.5 tracking-widest">{user?.plan} Membership</p>
+                </div>
+                <div className="w-11 h-11 rounded-2xl bg-orange-600 border border-orange-400/30 flex items-center justify-center font-black text-sm text-white shadow-lg shadow-orange-500/20 group-hover:scale-105 transition-all">
+                    {user?.name?.substring(0, 1).toUpperCase()}
+                </div>
             </div>
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary to-secondary p-[2px]">
-              <div className="w-full h-full rounded-xl bg-background flex items-center justify-center font-bold">
-                {user?.name?.charAt(0)}
-              </div>
-            </div>
-          </div>
         </div>
       </div>
     </header>

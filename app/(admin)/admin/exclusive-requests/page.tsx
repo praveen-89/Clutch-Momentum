@@ -13,8 +13,14 @@ import {
   Filter,
   Search,
   Check,
-  X
+  X,
+  ShieldCheck,
+  MessageSquare,
+  Globe,
+  Bell
 } from "lucide-react";
+import { cn } from "@/lib/utils";
+import { motion } from "framer-motion";
 
 interface LeadRequest {
   id: string;
@@ -34,6 +40,7 @@ const MOCK_REQUESTS: LeadRequest[] = [
 
 export default function ExclusiveRequestsPage() {
   const [requests, setRequests] = useState<LeadRequest[]>(MOCK_REQUESTS);
+  const [searchQuery, setSearchQuery] = useState("");
 
   const updateStatus = (id: string, newStatus: 'Approved' | 'Rejected') => {
     setRequests(prev => prev.map(req => 
@@ -41,109 +48,156 @@ export default function ExclusiveRequestsPage() {
     ));
   };
 
+  const filteredRequests = requests.filter(req => 
+    req.creatorName.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    req.brand.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
   return (
-    <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-700">
-      <div className="flex items-center justify-between">
-        <div>
-          <h1 className="text-3xl font-black uppercase italic tracking-tighter">Lead Approval Queue</h1>
-          <p className="text-slate-500 text-xs font-bold uppercase tracking-widest mt-1">Review and synchronize exclusive brand opportunities</p>
+    <div className="space-y-12 animate-in fade-in slide-in-from-bottom-8 duration-1000">
+      <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-8">
+        <div className="space-y-2">
+            <motion.div
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                className="flex items-center gap-2 px-3 py-1 rounded-lg bg-orange-500/10 border border-orange-500/20 w-fit"
+            >
+                <Bell size={12} className="text-orange-600" />
+                <span className="text-[9px] font-black uppercase tracking-[0.3em] text-orange-600">Pending Authorization Queue</span>
+            </motion.div>
+            <h1 className="text-4xl lg:text-5xl font-black uppercase italic tracking-tighter text-slate-900 leading-none">
+                Approval <span className="text-orange-600 text-glow">Protocol.</span>
+            </h1>
+            <p className="text-slate-500 text-xs font-black uppercase tracking-[0.3em] mt-2">
+                Review and synchronize exclusive partner opportunities
+            </p>
         </div>
-        <div className="flex gap-4">
-           <div className="flex flex-col items-end">
-             <span className="text-purple-500 text-lg font-black leading-none">12</span>
-             <span className="text-[10px] font-black uppercase tracking-widest text-slate-500">Awaiting Feedback</span>
+        
+        <div className="flex gap-10">
+           <div className="flex flex-col items-end group cursor-help">
+              <div className="flex items-center gap-2 mb-1">
+                <Clock size={14} className="text-orange-600 animate-pulse" />
+                <span className="text-2xl font-black text-slate-900 tracking-tighter italic">12</span>
+              </div>
+              <span className="text-[10px] font-black uppercase tracking-[0.3em] text-slate-400 group-hover:text-orange-600 transition-colors">Awaiting Decision</span>
            </div>
         </div>
       </div>
 
-      <div className="flex gap-4">
+      <div className="flex flex-col md:flex-row gap-6 p-3 rounded-[2.5rem] bg-white border border-slate-200 shadow-xl shadow-slate-200/20 relative">
         <div className="relative flex-grow group">
-          <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-500 group-focus-within:text-purple-500 transition-colors" size={18} />
+          <Search className="absolute left-8 top-1/2 -translate-y-1/2 text-slate-300 group-focus-within:text-orange-600 transition-colors" size={20} />
           <input 
             type="text" 
-            placeholder="Search by creator name or brand..." 
-            className="w-full bg-slate-900 border border-slate-800 rounded-xl py-4 pl-12 pr-6 text-sm outline-none focus:border-purple-500/50 transition-all font-bold"
+            placeholder="Search by creator profile or brand target node..." 
+            className="w-full bg-slate-50 border border-transparent rounded-[2rem] py-6 pl-16 pr-8 text-sm font-bold uppercase tracking-tight text-slate-900 outline-none focus:bg-white focus:border-orange-500/30 transition-all placeholder:text-slate-300 placeholder:italic shadow-inner focus:shadow-none duration-300"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
           />
         </div>
-        <button className="bg-slate-900 border border-slate-800 px-6 rounded-xl flex items-center gap-2 text-xs font-black uppercase tracking-widest text-slate-400">
-           <Filter size={16} /> Filter
+        <button className="bg-slate-50 border border-slate-200 px-10 rounded-[1.5rem] flex items-center gap-3 text-[10px] font-black uppercase tracking-[0.25em] text-slate-500 hover:text-orange-600 hover:bg-white hover:border-orange-200 transition-all shadow-sm active:scale-95 italic">
+          <Filter size={18} />
+          Refine Queue
         </button>
       </div>
 
-      <div className="space-y-6">
-        {requests.map((request) => (
-          <GlassCard key={request.id} className="p-8 bg-slate-900/40 border-slate-800 relative group overflow-hidden">
-            {request.status === 'Pending' && (
-              <div className="absolute top-0 right-0 p-1 px-4 bg-purple-600/20 text-purple-400 border-b border-l border-purple-500/30 rounded-bl-xl text-[8px] font-black uppercase tracking-widest">
-                Priority Review Required
-              </div>
-            )}
-            
-            <div className="flex flex-col lg:flex-row gap-8">
-              <div className="lg:w-1/3 space-y-4">
-                <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 rounded-xl bg-slate-950 border border-slate-800 flex items-center justify-center font-black text-slate-500 shadow-inner">
-                    {request.creatorName.charAt(0)}
-                  </div>
-                  <div>
-                    <h3 className="text-lg font-bold text-white tracking-tight leading-none mb-1">{request.creatorName}</h3>
-                    <p className="text-[10px] text-slate-500 font-bold uppercase group-hover:text-purple-500 transition-colors">Verified Creator Node</p>
-                  </div>
+      <div className="space-y-8">
+        {filteredRequests.map((request, i) => (
+          <motion.div
+            key={request.id}
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: i * 0.15 }}
+          >
+            <GlassCard className="p-10 bg-white/70 border-slate-200 relative group overflow-hidden shadow-2xl shadow-slate-200/40 hover:shadow-orange-500/10 hover:border-orange-500/30 hover:bg-white transition-all duration-700">
+                {request.status === 'Pending' && (
+                <div className="absolute top-0 right-0 p-2 px-8 bg-orange-600 text-white rounded-bl-[2rem] text-[10px] font-black uppercase tracking-[0.3em] shadow-xl shadow-orange-600/30 z-20 italic">
+                    Immediate Action Required
                 </div>
-                
-                <div className="p-4 rounded-xl bg-slate-950 border border-slate-900 space-y-2">
-                   <div className="flex items-center gap-2 text-xs font-black uppercase text-slate-400">
-                     <Zap size={14} fill="currentColor" className="text-purple-500" />
-                     {request.brand}
-                   </div>
-                   <p className="text-xs text-slate-500 italic">"{request.opportunity}"</p>
-                </div>
-              </div>
-
-              <div className="flex-grow space-y-4">
-                <p className="text-[10px] font-black uppercase tracking-widest text-slate-600">Creator's Justification Statement</p>
-                <div className="p-6 rounded-2xl bg-white/5 border border-white/5 text-sm text-slate-300 leading-relaxed italic relative">
-                  "{request.message}"
-                  <div className="absolute bottom-2 right-4 text-[10px] text-slate-600 non-italic">
-                    Logged {request.timestamp}
-                  </div>
-                </div>
-              </div>
-
-              <div className="lg:w-1/4 flex flex-col justify-center gap-4">
-                {request.status === 'Pending' ? (
-                  <>
-                    <button 
-                      onClick={() => updateStatus(request.id, 'Approved')}
-                      className="w-full h-12 bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl text-[10px] font-black uppercase tracking-widest transition-all shadow-lg shadow-emerald-500/10 flex items-center justify-center gap-2"
-                    >
-                      <Check size={16} /> Grant Access
-                    </button>
-                    <button 
-                      onClick={() => updateStatus(request.id, 'Rejected')}
-                      className="w-full h-12 bg-slate-900 hover:bg-red-500/10 hover:text-red-500 border border-slate-800 hover:border-red-500/20 text-slate-500 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all flex items-center justify-center gap-2"
-                    >
-                      <X size={16} /> Deny Request
-                    </button>
-                  </>
-                ) : (
-                  <div className={cn(
-                    "w-full h-12 rounded-xl flex items-center justify-center gap-2 text-[10px] font-black uppercase tracking-widest border",
-                    request.status === 'Approved' ? "bg-emerald-500/10 text-emerald-500 border-emerald-500/20" : "bg-red-500/10 text-red-500 border-red-500/20"
-                  )}>
-                    {request.status === 'Approved' ? <CheckCircle2 size={16} /> : <XCircle size={16} />}
-                    Request {request.status}
-                  </div>
                 )}
-              </div>
-            </div>
-          </GlassCard>
+                
+                <div className="flex flex-col lg:flex-row gap-12 relative z-10">
+                <div className="lg:w-1/3 space-y-10 border-r border-slate-100 pr-12 lg:pr-12 md:pr-0 sm:pr-0 border-dashed">
+                    <div className="flex items-center gap-6">
+                    <div className="w-20 h-20 rounded-2xl bg-slate-50 border border-slate-100 flex items-center justify-center font-black text-slate-300 group-hover:bg-orange-600 group-hover:text-white transition-all duration-700 shadow-inner group-hover:rotate-12 group-hover:scale-110 text-xl">
+                        {request.creatorName.charAt(0)}
+                    </div>
+                    <div>
+                        <h3 className="text-2xl font-black text-slate-900 tracking-tighter italic leading-none mb-2 uppercase group-hover:text-orange-600 transition-colors">{request.creatorName}</h3>
+                        <div className="flex items-center gap-2">
+                            <ShieldCheck size={14} className="text-emerald-500" />
+                            <p className="text-[10px] font-black uppercase tracking-[0.3em] text-slate-500">Verified Origin Node</p>
+                        </div>
+                    </div>
+                    </div>
+                    
+                    <div className="p-8 rounded-[2rem] bg-slate-50 border border-slate-100 space-y-5 transition-all duration-500 group-hover:bg-white group-hover:border-orange-100">
+                    <div className="flex items-center gap-3 text-xs font-black uppercase tracking-[0.25em] text-slate-950 italic">
+                        <div className="p-2.5 rounded-xl bg-orange-600 text-white shadow-lg shadow-orange-600/20">
+                            <Zap size={16} fill="currentColor" />
+                        </div>
+                        {request.brand} Objective
+                    </div>
+                    <p className="text-[11px] text-slate-400 font-black uppercase tracking-[0.2em] leading-relaxed">Scope: "{request.opportunity}"</p>
+                    </div>
+                </div>
+
+                <div className="flex-grow space-y-8">
+                    <div className="flex items-center gap-4">
+                        <MessageSquare size={16} className="text-orange-600" />
+                        <p className="text-[10px] font-black uppercase tracking-[0.4em] text-slate-400">Creator Payload / Justification</p>
+                    </div>
+                    <div className="p-10 rounded-[3rem] bg-slate-50/50 border border-slate-100 text-xl font-black text-slate-900 tracking-tight leading-relaxed italic relative min-h-[160px] shadow-inner group-hover:bg-white transition-all duration-500 group-hover:border-orange-50/50 group-hover:shadow-none">
+                    "{request.message}"
+                    <div className="absolute bottom-6 right-10 text-[10px] text-slate-400 uppercase tracking-widest non-italic font-black border-t border-slate-100 pt-3 px-4 flex items-center gap-3">
+                        <Globe size={12} className="text-orange-400" />
+                        Capture Log: {request.timestamp}
+                    </div>
+                    </div>
+                </div>
+
+                <div className="lg:w-1/4 flex flex-col justify-center gap-5">
+                    {request.status === 'Pending' ? (
+                    <>
+                        <button 
+                        onClick={() => updateStatus(request.id, 'Approved')}
+                        className="w-full py-6 bg-orange-600 hover:bg-orange-700 text-white rounded-2xl text-[11px] font-black uppercase tracking-[0.3em] transition-all shadow-xl shadow-orange-600/30 flex items-center justify-center gap-4 active:scale-95 border-none italic group/btn"
+                        >
+                        <Check size={20} className="group-hover:scale-125 transition-transform" /> Authorize Bit
+                        </button>
+                        <button 
+                        onClick={() => updateStatus(request.id, 'Rejected')}
+                        className="w-full py-6 bg-white hover:bg-red-50 hover:text-red-600 border border-slate-200 hover:border-red-200 text-slate-400 rounded-2xl text-[11px] font-black uppercase tracking-[0.3em] transition-all flex items-center justify-center gap-4 active:scale-95 shadow-sm group/btn"
+                        >
+                        <X size={20} className="group-hover:rotate-90 transition-transform" /> Purge Request
+                        </button>
+                    </>
+                    ) : (
+                    <motion.div 
+                        initial={{ scale: 0.9, opacity: 0 }}
+                        animate={{ scale: 1, opacity: 1 }}
+                        className={cn(
+                        "w-full py-8 rounded-[2rem] flex flex-col items-center justify-center gap-4 text-[11px] font-black uppercase tracking-[0.4em] border shadow-xl italic transition-all duration-700",
+                        request.status === 'Approved' ? "bg-emerald-50 text-emerald-600 border-emerald-100 shadow-emerald-500/10" : "bg-red-50 text-red-600 border-red-100 shadow-red-500/10"
+                    )}>
+                        {request.status === 'Approved' ? <CheckCircle2 size={32} className="mb-1" /> : <XCircle size={32} className="mb-1" />}
+                        Outcome: {request.status}
+                    </motion.div>
+                    )}
+                </div>
+                </div>
+            </GlassCard>
+          </motion.div>
         ))}
+        {filteredRequests.length === 0 && (
+          <div className="py-40 text-center space-y-6">
+            <div className="w-24 h-24 rounded-full bg-slate-50 border border-slate-100 flex items-center justify-center mx-auto shadow-inner text-slate-200">
+              <Zap size={32} />
+            </div>
+            <p className="text-[10px] font-black uppercase tracking-[0.5em] text-slate-400">Queue is fully synchronized / Empty</p>
+          </div>
+        )}
       </div>
     </div>
   );
-}
-
-function cn(...classes: any[]) {
-  return classes.filter(Boolean).join(' ');
 }

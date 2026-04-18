@@ -4,7 +4,7 @@ import Link from "next/link";
 import { CapsuleButton } from "../ui/capsule-button";
 import { cn } from "@/lib/utils";
 import { useScroll, useTransform, motion } from "framer-motion";
-import { LayoutDashboard, Menu, X } from "lucide-react";
+import { LayoutDashboard, Menu, X, LogIn } from "lucide-react";
 import { useState } from "react";
 
 export function Navbar() {
@@ -49,6 +49,10 @@ export function Navbar() {
             </Link>
           ))}
           <div className="h-4 w-px bg-white/10 mx-2" />
+          <Link href="/login" className="text-sm font-bold text-foreground/60 hover:text-primary transition-colors flex items-center gap-2">
+            <LogIn size={16} />
+            Login
+          </Link>
           <Link href="/register">
             <CapsuleButton className="px-8">Get Started Free</CapsuleButton>
           </Link>
@@ -77,6 +81,10 @@ export function Navbar() {
               {link.name}
             </Link>
           ))}
+          <Link href="/login" className="text-lg font-bold flex items-center gap-2" onClick={() => setIsOpen(false)}>
+            <LogIn size={18} />
+            Login
+          </Link>
           <Link href="/register" onClick={() => setIsOpen(false)}>
             <CapsuleButton className="w-full">Get Started Free</CapsuleButton>
           </Link>

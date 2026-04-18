@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { GlassCard } from "@/components/ui/glass-card";
 import { CapsuleButton } from "@/components/ui/capsule-button";
-import { Zap, Lock, Clock, Send, CheckCircle2, AlertCircle } from "lucide-react";
+import { Zap, Lock, Clock, Send, ShieldCheck, AlertCircle, TrendingUp } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 interface ExclusiveLead {
@@ -32,90 +32,109 @@ export default function ExclusiveLeadsPage() {
   };
 
   return (
-    <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-700">
-      <div className="space-y-1">
-        <h1 className="text-3xl font-bold tracking-tight">Exclusive Leads</h1>
-        <p className="text-foreground/50">High-value, time-sensitive collaboration opportunities curated for top-tier creators.</p>
+    <div className="space-y-12 animate-in fade-in slide-in-from-bottom-8 duration-1000">
+      <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
+        <div className="space-y-2">
+            <motion.div
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                className="flex items-center gap-2 px-3 py-1 rounded-lg bg-orange-500/10 border border-orange-500/20 w-fit"
+            >
+                <Zap size={12} className="text-orange-600" />
+                <span className="text-[9px] font-black uppercase tracking-[0.3em] text-orange-600">Priority Opportunity Hub</span>
+            </motion.div>
+            <h1 className="text-4xl lg:text-5xl font-black italic uppercase tracking-tighter leading-none text-slate-900">
+                Exclusive <span className="text-orange-600 text-glow">Leads.</span>
+            </h1>
+            <p className="text-slate-500 text-xs font-black uppercase tracking-[0.3em] mt-2">
+                High-value, time-sensitive collaboration nodes curated for elite creators
+            </p>
+        </div>
       </div>
 
-      <div className="p-6 rounded-2xl bg-gradient-to-r from-secondary/20 to-primary/20 border border-white/10 flex items-center justify-between gap-8">
-        <div className="flex items-center gap-4">
-          <div className="w-12 h-12 rounded-full bg-secondary/20 flex items-center justify-center text-secondary shadow-[0_0_20px_rgba(192,38,211,0.3)]">
-            <Zap size={24} fill="currentColor" />
+      <div className="p-8 rounded-[2rem] bg-orange-600 text-white flex flex-col md:flex-row items-center justify-between gap-8 relative overflow-hidden shadow-2xl shadow-orange-600/20 group">
+        <div className="absolute inset-0 bg-gradient-to-r from-orange-400 to-orange-700 pointer-events-none" />
+        <div className="absolute top-0 right-0 p-8 opacity-20 pointer-events-none group-hover:scale-110 transition-transform duration-1000">
+          <Zap size={100} fill="currentColor" />
+        </div>
+        
+        <div className="flex items-center gap-6 relative z-10">
+          <div className="w-16 h-16 rounded-3xl bg-white/20 backdrop-blur-md flex items-center justify-center border border-white/30 shadow-xl">
+            <TrendingUp size={32} />
           </div>
           <div>
-            <p className="font-bold">Premium Perk</p>
-            <p className="text-sm text-foreground/60 leading-relaxed">Exclusive leads are manually vetted and typically result in 3x higher deal values.</p>
+            <p className="text-sm font-black italic uppercase tracking-tighter">Premium Advantage</p>
+            <p className="text-xs font-bold opacity-80 leading-relaxed uppercase tracking-widest max-w-md">Our manual vetting yield typically results in 3x higher deal values for verified member instances.</p>
           </div>
         </div>
-        <div className="hidden md:block">
-          <div className="px-4 py-2 rounded-xl bg-white/5 border border-white/10 text-xs font-bold uppercase tracking-widest text-foreground/40">
-            Updated Hourly
+        
+        <div className="relative z-10">
+          <div className="px-6 py-3 rounded-2xl bg-white/20 border border-white/30 text-[10px] font-black uppercase tracking-widest animate-pulse">
+            Instance Update: Real-time
           </div>
         </div>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {leads.map((lead) => (
-          <GlassCard key={lead.id} className="p-8 space-y-8 relative overflow-hidden group">
+          <GlassCard key={lead.id} className="p-8 space-y-8 relative overflow-hidden group bg-white border-slate-200 shadow-sm hover:shadow-xl hover:shadow-orange-500/5 transition-all duration-500">
             {lead.status === 'locked' && (
-              <div className="absolute top-0 right-0 p-6 opacity-10 group-hover:opacity-20 transition-all">
-                <Lock size={120} />
+              <div className="absolute top-0 right-0 p-8 opacity-[0.03] group-hover:opacity-[0.07] group-hover:scale-110 transition-all duration-700 pointer-events-none">
+                <Lock size={150} />
               </div>
             )}
             
-            <div className="space-y-4 relative z-10">
+            <div className="space-y-6 relative z-10">
               <div className="flex items-center justify-between">
-                <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/5">
-                  <div className="w-2 h-2 rounded-full bg-secondary animate-pulse" />
-                  <span className="text-[10px] font-bold uppercase tracking-widest text-foreground/60">New Opportunity</span>
+                <div className="flex items-center gap-3 px-4 py-2 rounded-2xl bg-slate-50 border border-slate-100">
+                  <div className="w-2 h-2 rounded-full bg-orange-600 animate-pulse shadow-[0_0_10px_rgba(249,115,22,0.4)]" />
+                  <span className="text-[9px] font-black uppercase tracking-widest text-slate-500">Priority Node</span>
                 </div>
-                <div className="flex items-center gap-1 text-primary font-bold text-xs">
-                  <Zap size={12} className="fill-current" />
-                  {lead.matchScore}% Match
+                <div className="flex items-center gap-2 text-orange-600 font-black italic text-xs uppercase tracking-tighter">
+                  <Zap size={14} className="fill-current" />
+                  {lead.matchScore}% Yield
                 </div>
               </div>
 
               <div>
-                <h3 className="text-2xl font-bold tracking-tight">{lead.brand}</h3>
-                <p className="text-sm text-foreground/50 font-medium">{lead.opportunity}</p>
+                <h3 className="text-3xl font-black italic uppercase tracking-tighter text-slate-900 group-hover:text-orange-600 transition-colors duration-500">{lead.brand}</h3>
+                <p className="text-[10px] text-slate-500 font-black uppercase tracking-widest mt-2">{lead.opportunity}</p>
               </div>
 
-              <div className="pt-4 space-y-3">
-                <div className="flex items-center gap-2 text-xs font-medium text-foreground/40">
-                  <Clock size={14} />
-                  Deadline: {lead.deadline}
+              <div className="pt-4 space-y-4 border-t border-slate-50">
+                <div className="flex items-center gap-3 text-[10px] font-black uppercase tracking-widest text-slate-400">
+                  <Clock size={16} className="text-orange-600" />
+                  Expiring: <span className="text-slate-900 ml-auto">{lead.deadline}</span>
                 </div>
-                <div className="flex items-center gap-2 text-xs font-medium text-foreground/40">
-                  <CheckCircle2 size={14} />
-                  Budget: Verified Premium
+                <div className="flex items-center gap-3 text-[10px] font-black uppercase tracking-widest text-slate-400">
+                  <ShieldCheck size={16} className="text-emerald-500" />
+                  Budget Status: <span className="text-slate-900 ml-auto uppercase italic">Verified Prime</span>
                 </div>
               </div>
             </div>
 
-            <div className="pt-6 relative z-10">
+            <div className="pt-10 relative z-10">
               {lead.status === 'locked' && (
                 <CapsuleButton 
                   onClick={() => setSelectedLead(lead)}
-                  variant="secondary" 
-                  className="w-full h-12 flex items-center justify-center gap-2"
+                  className="w-full py-5 flex items-center justify-center gap-3 bg-slate-900 text-white hover:bg-orange-600 transition-all active:scale-95 border-none shadow-xl hover:shadow-orange-600/20"
                 >
                   <Lock size={16} />
-                  Request Access
+                  <span className="text-[11px] font-black uppercase tracking-[0.2em]">Request Access</span>
                 </CapsuleButton>
               )}
 
               {lead.status === 'pending' && (
-                <div className="w-full h-12 flex items-center justify-center gap-2 px-6 rounded-full bg-white/5 border border-white/10 text-xs font-bold uppercase tracking-widest text-foreground/40 italic">
-                  <Clock size={16} />
-                  Request Pending Review
+                <div className="w-full py-5 flex items-center justify-center gap-3 px-6 rounded-2xl bg-slate-50 border border-slate-100 text-[10px] font-black uppercase tracking-widest text-slate-400 italic">
+                  <Clock size={18} />
+                  Processing Verification...
                 </div>
               )}
 
               {lead.status === 'approved' && (
-                <CapsuleButton variant="primary" className="w-full h-12 flex items-center justify-center gap-2">
+                <CapsuleButton className="w-full py-5 flex items-center justify-center gap-3 bg-orange-600 text-white shadow-xl shadow-orange-600/20 border-none active:scale-95">
                   <Send size={16} />
-                  Submit Pitch
+                  <span className="text-[11px] font-black uppercase tracking-[0.2em]">Initiate Pitch</span>
                 </CapsuleButton>
               )}
             </div>
@@ -123,54 +142,59 @@ export default function ExclusiveLeadsPage() {
         ))}
       </div>
 
-      {/* Request Modal */}
+      {/* Access Request Overlay */}
       <AnimatePresence>
         {selectedLead && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center p-6 bg-background/80 backdrop-blur-sm">
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-6 bg-slate-950/20 backdrop-blur-md">
             <motion.div
-              initial={{ opacity: 0, scale: 0.9, y: 20 }}
+              initial={{ opacity: 0, scale: 0.95, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.9, y: 20 }}
-              className="w-full max-w-md"
+              exit={{ opacity: 0, scale: 0.95, y: 20 }}
+              className="w-full max-w-xl"
             >
-              <GlassCard variant="frosted" className="p-8 border-secondary/30 relative">
-                <div className="space-y-6">
-                  <div className="text-center space-y-2">
-                    <div className="mx-auto w-16 h-16 rounded-2xl bg-secondary/20 flex items-center justify-center text-secondary mb-4">
+              <GlassCard className="p-12 border-slate-200 bg-white relative overflow-hidden shadow-[0_30px_100px_rgba(0,0,0,0.1)]">
+                <div className="space-y-10 relative z-10">
+                  <div className="text-center space-y-3">
+                    <div className="mx-auto w-20 h-20 rounded-[2rem] bg-orange-600 flex items-center justify-center text-white mb-6 shadow-xl shadow-orange-600/20 border border-orange-400/30">
                       <Zap size={32} fill="currentColor" />
                     </div>
-                    <h2 className="text-2xl font-bold">Request Access</h2>
-                    <p className="text-xs text-foreground/50">Request access to the <span className="text-foreground font-bold">{selectedLead.brand}</span> exclusive lead.</p>
+                    <h2 className="text-4xl font-black italic uppercase tracking-tighter text-slate-900">Request <span className="text-orange-600">Instance.</span></h2>
+                    <p className="text-[10px] text-slate-500 font-black uppercase tracking-[0.3em]">Accessing exclusive lead: {selectedLead.brand}</p>
                   </div>
 
-                  <div className="space-y-4">
-                    <div className="p-4 rounded-xl bg-amber-500/5 border border-amber-500/10 flex gap-3 text-amber-500">
-                      <AlertCircle size={18} className="flex-shrink-0 mt-0.5" />
-                      <p className="text-[10px] font-bold uppercase leading-relaxed font-black">
-                        Requests are reviewed by our internal team. Access is granted based on niche relevancy and profile health.
-                      </p>
+                  <div className="space-y-6">
+                    <div className="p-6 rounded-2xl bg-orange-50 border border-orange-100 flex gap-5 text-orange-600">
+                      <AlertCircle size={22} className="flex-shrink-0 mt-0.5" />
+                      <div>
+                        <p className="text-xs font-black uppercase tracking-widest text-slate-900 mb-1">Operational Protocol</p>
+                        <p className="text-[11px] font-bold uppercase leading-relaxed tracking-widest opacity-80">
+                            Requests are manually audited based on instance niche relevancy and historical profile yields. Results in 24-48h.
+                        </p>
+                      </div>
                     </div>
                     
-                    <textarea 
-                      placeholder="Briefly state why you're a good match for this brand (e.g. past experience, target demographic)..."
-                      className="w-full h-32 bg-white/5 border border-white/10 rounded-xl p-4 text-sm outline-none focus:border-secondary/50 focus:ring-4 focus:ring-secondary/5 transition-all"
-                    />
+                    <div className="space-y-2">
+                        <label className="text-[9px] font-black uppercase tracking-[0.3em] text-slate-400 ml-4">Pitch Rationale</label>
+                        <textarea 
+                        placeholder="State your unique value proposition for this brand node..."
+                        className="w-full h-40 bg-slate-50 border border-slate-200 rounded-[2rem] p-8 text-sm font-medium outline-none focus:border-orange-500/50 focus:ring-8 focus:ring-orange-500/5 transition-all shadow-inner placeholder:text-slate-300"
+                        />
+                    </div>
                   </div>
 
-                  <div className="flex gap-3">
+                  <div className="flex gap-6">
                     <CapsuleButton 
                       onClick={() => setSelectedLead(null)}
-                      variant="ghost" 
-                      className="flex-1"
+                      variant="outline" 
+                      className="flex-1 py-5 border-slate-200 text-slate-500 text-[11px] font-black uppercase tracking-widest"
                     >
-                      Cancel
+                      Abort Request
                     </CapsuleButton>
                     <CapsuleButton 
                       onClick={() => handleRequestAccess(selectedLead.id)}
-                      variant="secondary" 
-                      className="flex-1"
+                      className="flex-1 py-5 bg-orange-600 text-white shadow-xl shadow-orange-600/20 active:scale-95 border-none"
                     >
-                      Submit Request
+                      <span className="text-[11px] font-black uppercase tracking-widest">Submit Rationale</span>
                     </CapsuleButton>
                   </div>
                 </div>

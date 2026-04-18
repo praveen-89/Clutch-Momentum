@@ -8,7 +8,8 @@ import { CapsuleButton } from "@/components/ui/capsule-button";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import Link from "next/link";
-import { UserPlus } from "lucide-react";
+import { UserPlus, Activity } from "lucide-react";
+import { motion } from "framer-motion";
 
 const registerSchema = z.object({
   name: z.string().min(2, "Name must be at least 2 characters"),
@@ -45,26 +46,35 @@ export default function RegisterPage() {
   };
 
   return (
-    <div className="space-y-6">
-      <div className="space-y-2">
-        <h1 className="text-2xl font-bold tracking-tight">Join Clutch Momentum</h1>
-        <p className="text-sm text-foreground/50">
-          Create your creator profile and start connecting with brands.
+    <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-700">
+      <div className="space-y-3 text-center">
+        <motion.div
+           initial={{ scale: 0.9, opacity: 0 }}
+           animate={{ scale: 1, opacity: 1 }}
+           className="inline-flex p-3 rounded-2xl bg-orange-500/10 text-orange-500 mb-2 border border-orange-500/20 shadow-inner"
+        >
+            <UserPlus size={28} />
+        </motion.div>
+        <h1 className="text-3xl font-black uppercase italic tracking-tighter text-slate-100 leading-none">Create <span className="text-orange-500">Account</span></h1>
+        <p className="text-[11px] font-black uppercase tracking-[0.2em] text-slate-400">
+          Join as a creator and grow with brands
         </p>
       </div>
 
-      <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+      <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
         <PremiumInput
           label="Full Name"
           placeholder="Enter your name"
           {...register("name")}
           error={errors.name?.message}
+          className="bg-white/5 border-white/10 text-white placeholder:text-slate-600 focus:border-orange-500/50"
         />
         <PremiumInput
           label="Email Address"
           placeholder="name@example.com"
           {...register("email")}
           error={errors.email?.message}
+          className="bg-white/5 border-white/10 text-white placeholder:text-slate-600 focus:border-orange-500/50"
         />
         <PremiumInput
           label="Password"
@@ -72,6 +82,7 @@ export default function RegisterPage() {
           placeholder="••••••••"
           {...register("password")}
           error={errors.password?.message}
+          className="bg-white/5 border-white/10 text-white placeholder:text-slate-600 focus:border-orange-500/50"
         />
         <PremiumInput
           label="Confirm Password"
@@ -79,19 +90,21 @@ export default function RegisterPage() {
           placeholder="••••••••"
           {...register("confirmPassword")}
           error={errors.confirmPassword?.message}
+          className="bg-white/5 border-white/10 text-white placeholder:text-slate-600 focus:border-orange-500/50"
         />
 
-        <div className="pt-2">
-          <CapsuleButton className="w-full" type="submit" disabled={isLoading}>
-            {isLoading ? "Creating Account..." : "Join as Creator"}
+        <div className="pt-6">
+          <CapsuleButton className="w-full bg-orange-600 hover:bg-orange-700 text-white border-none py-6 shadow-xl shadow-orange-600/20 active:scale-95 transition-all text-[11px] font-black uppercase tracking-[0.2em] italic group" type="submit" disabled={isLoading}>
+            {isLoading ? "Creating Account..." : "Create Account"}
+            {!isLoading && <Activity size={16} className="ml-3 group-hover:animate-pulse" />}
           </CapsuleButton>
         </div>
       </form>
 
-      <div className="text-center pt-4 border-t border-white/5">
-        <p className="text-sm text-foreground/50">
+      <div className="text-center pt-8 border-t border-slate-800">
+        <p className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-500">
           Already have an account?{" "}
-          <Link href="/login" className="text-primary font-bold hover:underline">
+          <Link href="/login" className="text-orange-500 hover:text-orange-400 font-black transition-colors">
             Sign In
           </Link>
         </p>

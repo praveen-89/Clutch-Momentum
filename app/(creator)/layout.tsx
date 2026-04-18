@@ -48,13 +48,16 @@ export default function CreatorLayout({
   }
 
   return (
-    <div className="flex h-screen overflow-hidden bg-background">
+    <div className="flex h-screen overflow-hidden bg-slate-50 text-slate-900 relative">
+      {/* Background Decor - Elite Orange Theme */}
+      <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-orange-400/10 blur-[150px] rounded-full pointer-events-none -z-10" />
+      <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-amber-400/5 blur-[120px] rounded-full pointer-events-none -z-10" />
+
       <Sidebar />
       <div className="flex-grow flex flex-col overflow-hidden">
         <Topbar />
-        <main className="flex-grow overflow-y-auto p-8 relative">
-          <div className="absolute top-0 right-0 w-[50%] h-[50%] bg-primary/5 blur-[120px] rounded-full pointer-events-none" />
-          <div className="relative z-10 max-w-7xl mx-auto">
+        <main className="flex-grow overflow-y-auto bg-slate-50/50 relative">
+          <div className="max-w-[1600px] mx-auto p-10">
             {children}
           </div>
         </main>
