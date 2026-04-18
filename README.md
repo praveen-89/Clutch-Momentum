@@ -1,36 +1,68 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Clutch Momentum - Creator-First SaaS Marketplace
 
-## Getting Started
+Clutch Momentum is a production-grade, premium SaaS platform dedicated to connecting creators directly with verified brand decision-makers.
 
-First, run the development server:
+## 🚀 Overview
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+The project provides a unified marketplace where creators can discover brand contacts, unlock them using a plan-based credit system, and request access to exclusive high-value leads. It features two distinct panels: a premium, aspirational **Creator Dashboard** and a powerful, operational **Admin Console**.
+
+## 🛠 Tech Stack
+
+- **Next.js 14+**: App Router & Server Components.
+- **TypeScript**: Strict type-safety across the board.
+- **Tailwind CSS v4**: Modern styling with a custom glassmorphism theme.
+- **Framer Motion**: Premium animations and layout transitions.
+- **Zustand**: Lightweight, persistent store for auth and global state.
+- **React Hook Form + Zod**: Robust form management and validation.
+- **Lucide React**: Vector icons for a clean aesthetic.
+
+## 📂 Project Structure
+
+```
+/frontend
+├── app/                  # Application routes (Route Groups: marketing, auth, creator, admin)
+├── components/           # Reusable UI system (ui, shared, marketing, dashboard)
+├── features/             # Core business logic modules
+├── services/             # Mock services layer for future API integration
+├── store/                # Persistent Zustand state
+├── data/mock/            # Realistic demonstration datasets
+└── docs/                 # Detailed technical documentation
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🔑 Demo Credentials
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+| Role | Email | Password |
+|------|-------|----------|
+| **Creator** | `creator@clutchmomentum.com` | `Creator@123` |
+| **Admin** | `admin@clutchmomentum.com` | `Admin@123` |
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 🧭 Routes
 
-## Learn More
+- **Public**: Home, About, Pricing, How It Works, Contact.
+- **Auth**: `/login`, `/register`, `/admin-login`.
+- **Creator**: `/dashboard`, `/brand-contacts`, `/exclusive-leads`, `/usage`, `/profile`.
+- **Admin**: `/admin/dashboard`, `/admin/manage-contacts`, `/admin/manage-users`.
 
-To learn more about Next.js, take a look at the following resources:
+## 📦 Getting Started
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+cd frontend
+npm install
+npm run dev
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 📄 Documentation
 
-## Deploy on Vercel
+For deep dives into the system, refer to the `/frontend/docs` directory:
+- [Architecture](./docs/ARCHITECTURE.md)
+- [Design System](./docs/DESIGN-SYSTEM.md)
+- [Route Map](./docs/ROUTES.md)
+- [Mock Auth Flow](./docs/MOCK-AUTH.md)
+- [Backend Integration](./docs/BACKEND-INTEGRATION.md)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 🔮 Future Roadmap
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- **JWT Integration**: Swap the mock service layer with a real Express/Node.js backend.
+- **Database**: Connect to Supabase for persistent cloud storage.
+- **Payments**: Integrate real Stripe checkout flows on the `/usage` page.
+- **Analytics**: Connect the admin dashboard to live DB metrics.

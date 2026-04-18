@@ -1,26 +1,86 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  --font-sans: "Inter", var(--font-geist-sans);
+  
+  --color-primary: oklch(0.6 0.25 260);
+  --color-secondary: oklch(0.7 0.2 310);
+  --color-accent: oklch(0.8 0.15 190);
+  
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  
+  --color-glass: var(--glass-bg);
+  --color-glass-border: var(--glass-border);
+  
+  /* Glassmorphism custom animations */
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+:root {
+  --background: oklch(0.98 0.01 260);
+  --foreground: oklch(0.15 0.02 260);
+  --card: oklch(1 0 0 / 0.7);
+  --card-foreground: oklch(0.15 0.02 260);
+  --glass-bg: rgba(255, 255, 255, 0.4);
+  --glass-border: rgba(255, 255, 255, 0.2);
+  --radius: 1rem;
+}
+
+.dark {
+  --background: oklch(0.1 0.02 260);
+  --foreground: oklch(0.98 0.01 260);
+  --card: oklch(0.15 0.02 260 / 0.6);
+  --card-foreground: oklch(0.98 0.01 260);
+  --glass-bg: rgba(17, 24, 39, 0.4);
+  --glass-border: rgba(255, 255, 255, 0.1);
+}
+
+@layer base {
+  * {
+    border-color: var(--glass-border);
+  }
+  body {
+    background: var(--background);
+    color: var(--foreground);
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+}
+
+@layer utilities {
+  .glass {
+    @apply bg-glass backdrop-blur-xl border border-glass-border shadow-xl;
+  }
+  
+  .glass-card {
+    @apply bg-glass backdrop-blur-xl border border-glass-border shadow-xl rounded-2xl overflow-hidden;
+  }
+  
+  .text-glow {
+    text-shadow: 0 0 15px currentColor;
+  }
+  
+  .bg-gradient-premium {
+    background: radial-gradient(circle at top left, var(--color-primary), transparent 40%),
+                radial-gradient(circle at bottom right, var(--color-secondary), transparent 40%),
+                var(--background);
+  }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: oklch(0.5 0.05 260 / 0.3);
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: oklch(0.5 0.05 260 / 0.5);
 }
