@@ -1,13 +1,49 @@
 "use client";
 
 import { cn } from "@/lib/utils";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { GlassCard } from "@/components/ui/glass-card";
 import { CapsuleButton } from "@/components/ui/capsule-button";
 import { PremiumInput } from "@/components/ui/premium-input";
-import { Mail, Phone, MapPin, Send, Star, Zap } from "lucide-react";
+import { Mail, Phone, MapPin, Send, Star, Zap, ChevronDown, Check } from "lucide-react";
+import { useState, useRef, useEffect } from "react";
+
+const COUNTRY_CODES = [
+  { code: "+91", flag: "🇮🇳", name: "India" },
+  { code: "+1",  flag: "🇺🇸", name: "USA" },
+  { code: "+44", flag: "🇬🇧", name: "UK" },
+  { code: "+61", flag: "🇦🇺", name: "Australia" },
+  { code: "+971", flag: "🇦🇪", name: "UAE" },
+  { code: "+65", flag: "🇸🇬", name: "Singapore" },
+  { code: "+49", flag: "🇩🇪", name: "Germany" },
+  { code: "+33", flag: "🇫🇷", name: "France" },
+  { code: "+81", flag: "🇯🇵", name: "Japan" },
+  { code: "+86", flag: "🇨🇳", name: "China" },
+  { code: "+55", flag: "🇧🇷", name: "Brazil" },
+  { code: "+27", flag: "🇿🇦", name: "South Africa" },
+  { code: "+92", flag: "🇵🇰", name: "Pakistan" },
+  { code: "+880", flag: "🇧🇩", name: "Bangladesh" },
+  { code: "+60", flag: "🇲🇾", name: "Malaysia" },
+  { code: "+966", flag: "🇸🇦", name: "Saudi Arabia" },
+  { code: "+234", flag: "🇳🇬", name: "Nigeria" },
+  { code: "+254", flag: "🇰🇪", name: "Kenya" },
+];
 
 export default function ContactPage() {
+  const [selectedCountry, setSelectedCountry] = useState("+91");
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setIsDropdownOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
   return (
     <div className="pt-32 pb-40 relative overflow-hidden">
       {/* Background Decor */}
@@ -120,6 +156,78 @@ export default function ContactPage() {
                   <PremiumInput label="Email Address" placeholder="Ex: arjun@momentum.com" type="email" className="h-14" />
                 </div>
                 
+                {/* Contact Number with Custom Dropdown */}
+                <div className="space-y-2 relative">
+                  <label className="text-xs font-bold uppercase tracking-[0.2em] text-foreground/40 ml-1">
+                    Contact Number
+                  </label>
+                  <div className="flex gap-3 h-14">
+                    {/* Custom Country Selector */}
+                    <div className="relative" ref={dropdownRef}>
+                      <button
+                        type="button"
+                        onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+                        className={cn(
+                          "h-full flex items-center justify-between gap-2 bg-foreground/[0.03] border border-foreground/10 text-foreground rounded-2xl px-4 min-w-[110px] hover:border-primary/30 transition-all focus:border-primary/50 outline-none",
+                          isDropdownOpen && "border-primary/50 border-glow"
+                        )}
+                      >
+                        <span className="text-[13px] font-bold">
+                          {COUNTRY_CODES.find(c => c.code === selectedCountry)?.flag} {selectedCountry}
+                        </span>
+                        <ChevronDown size={14} className={cn("text-slate-500 transition-transform duration-300", isDropdownOpen && "rotate-180 text-primary")} />
+                      </button>
+
+                      <AnimatePresence>
+                        {isDropdownOpen && (
+                          <motion.div
+                            initial={{ opacity: 0, y: 10, scale: 0.95 }}
+                            animate={{ opacity: 1, y: 5, scale: 1 }}
+                            exit={{ opacity: 0, y: 10, scale: 0.95 }}
+                            className="absolute left-0 top-full z-50 w-[200px] bg-slate-100 border border-slate-200 rounded-2xl shadow-2xl overflow-hidden backdrop-blur-xl"
+                          >
+                            <div className="max-h-[188px] overflow-y-auto py-2 custom-scrollbar">
+                              {COUNTRY_CODES.map((c) => (
+                                <button
+                                  key={c.code + c.name}
+                                  type="button"
+                                  onClick={() => {
+                                    setSelectedCountry(c.code);
+                                    setIsDropdownOpen(false);
+                                  }}
+                                  className={cn(
+                                    "w-full flex items-center justify-between px-4 py-3 hover:bg-black/5 transition-colors text-left group",
+                                    selectedCountry === c.code && "bg-primary/10"
+                                  )}
+                                >
+                                  <div className="flex items-center gap-3">
+                                    <span className="text-lg">{c.flag}</span>
+                                    <div className="flex flex-col">
+                                      <span className="text-[11px] font-black uppercase tracking-widest text-slate-800">{c.code}</span>
+                                      <span className="text-[9px] text-slate-500 font-bold uppercase">{c.name}</span>
+                                    </div>
+                                  </div>
+                                  {selectedCountry === c.code && <Check size={12} className="text-primary" />}
+                                </button>
+                              ))}
+                            </div>
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
+                    </div>
+
+                    {/* Phone Input */}
+                    <div className="flex-1 relative group">
+                      <Phone size={16} className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-500 group-focus-within:text-primary transition-colors z-10" />
+                      <input
+                        type="tel"
+                        placeholder="Phone Number"
+                        className="w-full h-full bg-foreground/[0.03] border border-foreground/10 text-foreground placeholder:text-foreground/30 rounded-2xl pl-12 pr-4 text-sm font-bold focus:outline-none focus:border-primary/50 transition-all"
+                      />
+                    </div>
+                  </div>
+                </div>
+
                 <PremiumInput label="Subject / Inquiry Type" placeholder="How can we accelerate your journey?" className="h-14" />
                 
                 <div className="space-y-3">
