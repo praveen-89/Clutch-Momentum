@@ -24,7 +24,7 @@ export default function AuthLayout({
       <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-orange-600/20 blur-[120px] rounded-full animate-pulse pointer-events-none" />
       <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-amber-600/10 blur-[120px] rounded-full animate-pulse pointer-events-none" />
 
-      <div className="flex-grow flex items-center justify-center p-6 lg:p-12 relative z-10">
+      <div className="flex-grow flex items-center justify-center p-4 py-12 lg:p-12 relative z-10 overflow-y-auto custom-scrollbar">
         <div className="w-full max-w-md">
           <div className="text-center mb-8">
             <Link href="/" className="inline-flex items-center gap-3 mb-4 group">
