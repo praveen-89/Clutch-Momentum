@@ -1,9 +1,10 @@
 "use client";
 
 import Link from "next/link";
+import { Logo } from "../ui/logo";
 import { CapsuleButton } from "../ui/capsule-button";
 import { cn } from "@/lib/utils";
-import { useScroll, useTransform, motion } from "framer-motion";
+import { useScroll, useTransform, motion, AnimatePresence } from "framer-motion";
 import { LayoutDashboard, Menu, X, LogIn } from "lucide-react";
 import { useState } from "react";
 
@@ -27,14 +28,18 @@ export function Navbar() {
 
   return (
     <motion.nav
-      style={{ backgroundColor, backdropFilter }}
-      className="fixed top-0 left-0 right-0 z-50 border-b border-transparent transition-all duration-300"
+      style={{ 
+        backgroundColor: isOpen ? "var(--background)" : backgroundColor, 
+        backdropFilter: isOpen ? "blur(24px)" : backdropFilter 
+      }}
+      className={cn(
+        "fixed top-0 left-0 right-0 z-50 border-b transition-all duration-500",
+        isOpen ? "border-foreground/10 h-screen md:h-20" : "border-transparent h-20"
+      )}
     >
-      <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-        <Link href="/" className="flex items-center gap-2 group">
-          <span className="text-xl font-extrabold tracking-tight">
-            <span className="text-primary">Clutch</span> Momentum
-          </span>
+      <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between relative z-[60]">
+        <Link href="/" className="flex items-center gap-2 group" onClick={() => setIsOpen(false)}>
+          <Logo size="md" />
         </Link>
 
         {/* Desktop Links */}
@@ -59,37 +64,59 @@ export function Navbar() {
         </div>
 
         {/* Mobile Toggle */}
-        <button className="md:hidden p-2" onClick={() => setIsOpen(!isOpen)}>
-          {isOpen ? <X /> : <Menu />}
+        <button className="md:hidden p-2 text-foreground" onClick={() => setIsOpen(!isOpen)}>
+          {isOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
       </div>
 
       {/* Mobile Menu */}
-      {isOpen && (
-        <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="md:hidden absolute top-20 left-0 right-0 bg-background/95 backdrop-blur-xl border-b border-white/10 p-6 flex flex-col gap-6"
-        >
-          {navLinks.map((link) => (
-            <Link
-              key={link.name}
-              href={link.href}
-              className="text-lg font-bold"
-              onClick={() => setIsOpen(false)}
-            >
-              {link.name}
-            </Link>
-          ))}
-          <Link href="/login" className="text-lg font-bold flex items-center gap-2" onClick={() => setIsOpen(false)}>
-            <LogIn size={18} />
-            Login
-          </Link>
-          <Link href="/register" onClick={() => setIsOpen(false)}>
-            <CapsuleButton className="w-full">Get Started Free</CapsuleButton>
-          </Link>
-        </motion.div>
-      )}
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ opacity: 0, x: "100%" }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: "100%" }}
+            transition={{ type: "spring", damping: 25, stiffness: 200 }}
+            className="md:hidden fixed inset-0 top-20 bg-background flex flex-col p-8 z-50 overflow-y-auto"
+          >
+            <div className="flex flex-col gap-8 py-10">
+              {navLinks.map((link, i) => (
+                <motion.div
+                  key={link.name}
+                  initial={{ opacity: 0, x: 20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: i * 0.1 }}
+                >
+                  <Link
+                    href={link.href}
+                    className="text-4xl font-black italic uppercase tracking-tighter hover:text-primary transition-colors"
+                    onClick={() => setIsOpen(false)}
+                  >
+                    {link.name}
+                  </Link>
+                </motion.div>
+              ))}
+              
+              <div className="h-px w-full bg-foreground/5 my-4" />
+              
+              <motion.div
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: navLinks.length * 0.1 }}
+                className="flex flex-col gap-6"
+              >
+                <Link href="/login" className="text-2xl font-black italic uppercase tracking-tighter flex items-center gap-3" onClick={() => setIsOpen(false)}>
+                  <LogIn size={24} className="text-primary" />
+                  Login
+                </Link>
+                <Link href="/register" onClick={() => setIsOpen(false)}>
+                  <CapsuleButton className="w-full py-6 text-lg">Get Started Free</CapsuleButton>
+                </Link>
+              </motion.div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </motion.nav>
   );
 }

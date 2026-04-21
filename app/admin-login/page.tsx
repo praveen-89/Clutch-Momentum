@@ -11,6 +11,7 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { ShieldCheck, Lock, AlertTriangle, Fingerprint } from "lucide-react";
 import { GlassCard } from "@/components/ui/glass-card";
+import { Logo } from "@/components/ui/logo";
 
 const loginSchema = z.object({
   email: z.string().email("Invalid admin email"),
@@ -53,25 +54,15 @@ export default function AdminLoginPage() {
       <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-amber-600/10 blur-[120px] rounded-full -z-10" />
       
       <div className="w-full max-w-md relative z-10 space-y-8">
-        <div className="text-center space-y-6">
-          <motion.div 
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            className="inline-flex p-5 rounded-[2rem] bg-slate-900 border border-slate-800 text-orange-600 shadow-2xl shadow-orange-600/20 relative group"
-          >
-            <div className="absolute inset-0 bg-gradient-to-tr from-orange-600/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity rounded-[2rem]" />
-            <ShieldCheck size={48} className="relative z-10 group-hover:scale-110 transition-transform duration-500" />
-          </motion.div>
+        <div className="text-center space-y-8">
+          <div className="flex justify-center">
+            <Logo size="xl" />
+          </div>
           
-          <div className="space-y-3">
-            <h1 className="text-5xl font-black tracking-tighter text-white uppercase italic leading-none">
-              Clutch <span className="text-orange-600 text-glow">Momentum</span>
-            </h1>
-            <div className="px-5 py-2 rounded-full bg-orange-600/10 border border-orange-500/20 inline-block backdrop-blur-md">
-              <span className="text-[10px] font-black uppercase tracking-[0.4em] text-orange-500">
-                Admin Access
-              </span>
-            </div>
+          <div className="px-5 py-2 rounded-full bg-orange-600/10 border border-orange-500/20 inline-block backdrop-blur-md">
+            <span className="text-[10px] font-black uppercase tracking-[0.4em] text-orange-500">
+              Admin Access
+            </span>
           </div>
         </div>
 

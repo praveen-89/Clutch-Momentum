@@ -1,6 +1,7 @@
 "use client";
 
 import { GlassCard } from "@/components/ui/glass-card";
+import { Logo } from "@/components/ui/logo";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
@@ -24,14 +25,11 @@ export default function AuthLayout({
       <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-orange-600/20 blur-[120px] rounded-full animate-pulse pointer-events-none" />
       <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-amber-600/10 blur-[120px] rounded-full animate-pulse pointer-events-none" />
 
-      <div className="flex-grow flex items-center justify-center p-4 py-12 lg:p-12 relative z-10 overflow-y-auto custom-scrollbar">
+      <div className="flex-grow flex items-start justify-center p-4 py-24 lg:p-12 relative z-10 overflow-y-auto custom-scrollbar">
         <div className="w-full max-w-md">
-          <div className="text-center mb-8">
-            <Link href="/" className="inline-flex items-center gap-3 mb-4 group">
-              <div className="w-12 h-12 rounded-2xl bg-orange-600 flex items-center justify-center text-white font-black text-2xl shadow-xl shadow-orange-600/20 group-hover:scale-110 group-hover:rotate-6 transition-all duration-500">
-                C
-              </div>
-              <span className="text-3xl font-black tracking-tighter uppercase italic">Clutch <span className="text-orange-500 text-glow">Momentum</span></span>
+          <div className="text-center mb-10 flex justify-center">
+            <Link href="/" className="inline-flex items-center gap-3 group transition-transform hover:scale-105 active:scale-95">
+              <Logo size="lg" />
             </Link>
           </div>
           

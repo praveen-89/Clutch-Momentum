@@ -8,7 +8,7 @@ import Link from "next/link";
 
 export function Hero() {
   return (
-    <section className="relative min-h-[85vh] lg:h-[90vh] flex items-center py-12 lg:py-0 overflow-hidden">
+    <section className="relative min-h-[calc(100vh-5rem)] flex items-center py-12 lg:pt-16 lg:pb-12 overflow-hidden">
       {/* Background Decor */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full -z-10 bg-gradient-premium opacity-50" />
       <div className="absolute top-20 right-[10%] w-64 h-64 bg-primary/20 rounded-full blur-[100px] animate-pulse" />
@@ -70,7 +70,7 @@ export function Hero() {
           initial={{ opacity: 0, scale: 0.9, y: 20 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.2 }}
-          className="relative"
+          className="relative lg:-mt-20"
         >
           {/* Main Card */}
           <motion.div

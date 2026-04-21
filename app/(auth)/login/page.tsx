@@ -53,14 +53,8 @@ export default function LoginPage() {
   return (
     <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-700">
       <div className="space-y-3 text-center">
-        <motion.div
-           initial={{ scale: 0.9, opacity: 0 }}
-           animate={{ scale: 1, opacity: 1 }}
-           className="inline-flex p-3 rounded-2xl bg-orange-500/10 text-orange-500 mb-2 border border-orange-500/20 shadow-inner"
-        >
-            <ShieldCheck size={28} />
-        </motion.div>
         <h1 className="text-3xl font-black uppercase italic tracking-tighter text-slate-100 leading-none">Welcome <span className="text-orange-500">Back</span></h1>
+
         <p className="text-[11px] font-black uppercase tracking-[0.2em] text-slate-400">
           Sign in to your account
         </p>

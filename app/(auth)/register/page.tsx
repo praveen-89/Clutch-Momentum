@@ -86,14 +86,8 @@ export default function RegisterPage() {
   return (
     <div className="space-y-6 animate-in fade-in slide-in-from-bottom-4 duration-700 max-h-[80vh] overflow-y-auto px-1 custom-scrollbar">
       <div className="space-y-2 text-center pb-2">
-        <motion.div
-           initial={{ scale: 0.9, opacity: 0 }}
-           animate={{ scale: 1, opacity: 1 }}
-           className="inline-flex p-3 rounded-2xl bg-orange-500/10 text-orange-500 mb-1 border border-orange-500/20 shadow-inner"
-        >
-            <UserPlus size={24} />
-        </motion.div>
         <h1 className="text-2xl font-black uppercase italic tracking-tighter text-slate-100 leading-none">Create <span className="text-orange-500">Account</span></h1>
+
         <p className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">
           Join the elite creator network
         </p>

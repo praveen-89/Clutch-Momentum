@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { Logo } from "../ui/logo";
 
 export function Footer() {
   const sections = [
@@ -33,10 +34,7 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-20">
           <div className="col-span-1 md:col-span-1 space-y-6">
             <Link href="/" className="flex items-center gap-2">
-              <div className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center text-white font-bold">
-                C
-              </div>
-              <span className="text-xl font-bold tracking-tight">Clutch Momentum</span>
+              <Logo size="md" />
             </Link>
             <p className="text-sm text-foreground/50 leading-relaxed">
               Unlocking real brand collaborations with decision makers. No middlemen. Just real opportunities.

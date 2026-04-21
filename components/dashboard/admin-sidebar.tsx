@@ -15,6 +15,7 @@ import {
   ShieldAlert
 } from "lucide-react";
 import { useAuthStore } from "@/store/useAuthStore";
+import { Logo } from "@/components/ui/logo";
 
 export function AdminSidebar() {
   const pathname = usePathname();
@@ -34,9 +35,7 @@ export function AdminSidebar() {
     <aside className="w-72 border-r border-slate-200 bg-white/90 backdrop-blur-3xl flex flex-col h-full shadow-[20px_0_60px_rgba(0,0,0,0.05)] z-30 relative">
       <div className="p-8">
         <Link href="/admin/dashboard" className="flex items-center gap-4 group">
-          <div className="w-12 h-12 rounded-2xl bg-orange-600 flex items-center justify-center text-white font-black shadow-[0_0_30px_rgba(249,115,22,0.2)] group-hover:scale-110 transition-all duration-500 border border-orange-400/30">
-            <ShieldAlert size={24} />
-          </div>
+          <Logo variant="full" size="sm" className="shadow-lg shadow-black/5" />
           <div className="space-y-0.5">
             <span className="block font-black tracking-tighter text-2xl uppercase italic text-slate-900 leading-none">Admin</span>
             <span className="text-[11px] font-black uppercase tracking-[0.3em] text-orange-600 leading-none">Console</span>
