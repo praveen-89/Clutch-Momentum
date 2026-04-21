@@ -84,7 +84,7 @@ export default function RegisterPage() {
   };
 
   return (
-    <div className="space-y-6 animate-in fade-in slide-in-from-bottom-4 duration-700 max-h-[80vh] overflow-y-auto px-1 custom-scrollbar">
+    <div className="space-y-6 animate-in fade-in slide-in-from-bottom-4 duration-700 pb-10">
       <div className="space-y-2 text-center pb-2">
         <h1 className="text-2xl font-black uppercase italic tracking-tighter text-slate-100 leading-none">Create <span className="text-orange-500">Account</span></h1>
 

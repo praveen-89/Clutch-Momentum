@@ -1,90 +1,149 @@
-import { motion } from "framer-motion";
-import { GlassCard } from "@/components/ui/glass-card";
-import { Shield, Lock, Eye, ArrowRight, Star } from "lucide-react";
+import Link from 'next/link';
 
 export default function PrivacyPage() {
-  const sections = [
-    {
-      title: "Information Acquisition",
-      icon: <Eye size={20} />,
-      content: "We collect high-intent data necessary to accelerate your creator journey. This includes identity details (Name, Email), contact coordinates (Phone), and operational usage telemetry to optimize your experience."
-    },
-    {
-      title: "Strategic Data Usage",
-      icon: <Shield size={20} />,
-      content: "Your data is used to establish direct connections with global brand founders. We leverage transmission logs to refine our matching engine and ensure secure, elite access to brand contacts."
-    },
-    {
-      title: "Data Sovereignty",
-      icon: <Lock size={20} />,
-      content: "You maintain absolute control over your digital legacy. At any point, you may access, rectify, or request the permanent erasure of your data from the Clutch Momentum ecosystem."
-    },
-    {
-        title: "Security & Shielding",
-        icon: <Star size={20} />,
-        content: "We employ mission-critical encryption (SSL/TLS) and strict access controls. Your contact data is shielded from unauthorized resale and used exclusively for your collaboration pursuits."
-    }
-  ];
-
   return (
-    <div className="pt-32 pb-40 relative overflow-hidden bg-slate-950 text-slate-100 min-h-screen">
-      {/* Background Decor */}
-      <div className="absolute top-0 left-1/4 w-[600px] h-[600px] bg-orange-600/5 blur-[150px] rounded-full -z-0" />
-      <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-amber-600/5 blur-[120px] rounded-full -z-0" />
+    <div className="bg-white min-h-screen text-slate-900 font-sans pb-32">
+      {/* Header Banner */}
+      <div className="bg-slate-900 pt-32 pb-16 px-6">
+         <div className="max-w-5xl mx-auto flex flex-col md:flex-row items-baseline justify-between">
+           <h1 className="text-4xl font-bold text-white tracking-tight">Privacy policy</h1>
+           <div className="flex items-center gap-2 text-sm font-medium mt-4 md:mt-0">
+             <Link href="/" className="text-slate-400 hover:text-white transition-colors hover:underline">Home</Link>
+             <span className="text-slate-600">›</span>
+             <span className="text-white">Privacy policy</span>
+           </div>
+         </div>
+      </div>
 
-      <div className="max-w-4xl mx-auto px-6 relative z-10">
-        <div className="text-center space-y-8 mb-24">
-          <div className="inline-flex items-center gap-2 px-6 py-2 rounded-full bg-white/5 border border-white/10 backdrop-blur-md">
-            <Shield size={14} className="text-orange-500" />
-            <span className="text-xs font-black uppercase tracking-[0.3em] text-orange-500 italic">Security Protocol</span>
+      {/* Content */}
+      <div className="max-w-5xl mx-auto px-6 mt-16">
+        <div className="space-y-10 text-base leading-relaxed text-slate-700">
+          
+          <div className="mb-12">
+            <h2 className="text-2xl font-bold text-slate-900 mb-4">PRIVACY POLICY – CLUTCH MOMENTUM</h2>
           </div>
-          
-          <h1 className="text-5xl lg:text-7xl font-black italic uppercase tracking-tighter leading-none">
-            Privacy <br />
-            <span className="text-orange-500 text-glow">Manifesto.</span>
-          </h1>
-          
-          <p className="text-xl text-slate-400 max-w-2xl mx-auto leading-relaxed font-bold uppercase tracking-tight">
-            Transparent, secure, and creator-first. How we handle your transmission data.
-          </p>
-        </div>
 
-        <div className="space-y-8">
-          {sections.map((section, i) => (
-            <GlassCard key={i} className="p-10 border-white/5 hover:border-orange-500/20 transition-all group">
-              <div className="flex gap-6 items-start">
-                <div className="w-14 h-14 rounded-2xl bg-orange-500/10 border border-orange-500/20 flex items-center justify-center text-orange-500 group-hover:bg-orange-500 group-hover:text-black transition-all duration-500 shrink-0">
-                  {section.icon}
-                </div>
-                <div className="space-y-4">
-                  <h3 className="text-2xl font-black italic uppercase tracking-tighter text-slate-100">
-                    {section.title}
-                  </h3>
-                  <p className="text-slate-400 font-medium leading-relaxed">
-                    {section.content}
-                  </p>
-                </div>
+          <section>
+            <h3 className="text-lg font-bold text-slate-900 mb-3">1. Introduction</h3>
+            <p>
+              Clutch Momentum (“we”, “our”, “us”) is committed to protecting your privacy. This Privacy Policy explains how we collect, use, and protect your information when you use our platform.
+            </p>
+            <p className="mt-2">
+              A privacy policy is required for any website collecting user data and must explain data collection, usage, and user rights clearly.
+            </p>
+          </section>
+
+          <section>
+            <h3 className="text-lg font-bold text-slate-900 mb-5">2. Information We Collect</h3>
+            
+            <div className="space-y-6">
+              <div>
+                <h4 className="font-semibold text-slate-900 mb-2">a. Personal Information</h4>
+                <ul className="list-disc pl-5 space-y-1">
+                  <li>Name</li>
+                  <li>Email address</li>
+                  <li>Contact number</li>
+                  <li>Social media profiles</li>
+                </ul>
               </div>
-            </GlassCard>
-          ))}
-        </div>
 
-        <div className="mt-24 p-10 rounded-[2.5rem] bg-orange-600 text-black overflow-hidden relative group">
-            <div className="relative z-10 space-y-4 text-center">
-                <h2 className="text-3xl font-black italic uppercase tracking-tighter">Have Legal Inquiries?</h2>
-                <p className="font-black uppercase tracking-widest text-[10px] opacity-80">Our transmission team is standing by to clarify our protocols.</p>
-                <div className="pt-4">
-                    <a href="mailto:support@clutchmomentum.com" className="inline-flex items-center gap-2 font-black uppercase italic tracking-widest hover:translate-x-2 transition-transform">
-                        Establish Connection <ArrowRight size={20} />
-                    </a>
-                </div>
+              <div>
+                <h4 className="font-semibold text-slate-900 mb-2">b. Usage Data</h4>
+                <ul className="list-disc pl-5 space-y-1">
+                  <li>IP address</li>
+                  <li>Browser type</li>
+                  <li>Device information</li>
+                  <li>Pages visited</li>
+                </ul>
+              </div>
+
+              <div>
+                <h4 className="font-semibold text-slate-900 mb-2">c. Payment Information</h4>
+                <ul className="list-disc pl-5 space-y-1">
+                  <li>Billing details (processed via third-party payment gateways)</li>
+                </ul>
+              </div>
             </div>
-            {/* Glossy overlay */}
-            <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
-        </div>
-        
-        <div className="mt-20 text-center">
-             <p className="text-[10px] font-black uppercase tracking-[0.4em] text-slate-600">Last Transmission Update: {new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</p>
+          </section>
+
+          <section>
+            <h3 className="text-lg font-bold text-slate-900 mb-3">3. How We Use Your Information</h3>
+            <p className="mb-2">We use your data to:</p>
+            <ul className="list-disc pl-5 space-y-1">
+              <li>Create and manage user accounts</li>
+              <li>Provide access to brand contacts</li>
+              <li>Improve platform performance</li>
+              <li>Communicate updates and offers</li>
+              <li>Process payments</li>
+            </ul>
+          </section>
+
+          <section>
+            <h3 className="text-lg font-bold text-slate-900 mb-3">4. Sharing of Information</h3>
+            <p className="mb-2">We do not sell your data. We may share data with:</p>
+            <ul className="list-disc pl-5 space-y-1">
+              <li>Payment providers</li>
+              <li>Analytics tools</li>
+              <li>Legal authorities (if required)</li>
+            </ul>
+          </section>
+
+          <section>
+            <h3 className="text-lg font-bold text-slate-900 mb-3">5. Data Security</h3>
+            <p>
+              We implement reasonable security measures to protect your data. However, no system is 100% secure.
+            </p>
+          </section>
+
+          <section>
+            <h3 className="text-lg font-bold text-slate-900 mb-3">6. Cookies & Tracking</h3>
+            <p className="mb-2">We use cookies to:</p>
+            <ul className="list-disc pl-5 space-y-1">
+              <li>Improve user experience</li>
+              <li>Track platform usage</li>
+              <li>Personalize content</li>
+            </ul>
+          </section>
+
+          <section>
+            <h3 className="text-lg font-bold text-slate-900 mb-3">7. User Rights</h3>
+            <p className="mb-2">You have the right to:</p>
+            <ul className="list-disc pl-5 space-y-1">
+              <li>Access your data</li>
+              <li>Request correction</li>
+              <li>Request deletion</li>
+              <li>Opt-out of communications</li>
+            </ul>
+          </section>
+
+          <section>
+            <h3 className="text-lg font-bold text-slate-900 mb-3">8. Third-Party Links</h3>
+            <p>
+              Our platform may contain links to third-party websites. We are not responsible for their privacy practices.
+            </p>
+          </section>
+
+          <section>
+            <h3 className="text-lg font-bold text-slate-900 mb-3">9. Data Retention</h3>
+            <p>
+              We retain your data only as long as necessary for business and legal purposes.
+            </p>
+          </section>
+
+          <section>
+            <h3 className="text-lg font-bold text-slate-900 mb-3">10. Changes to Policy</h3>
+            <p>
+              We may update this policy at any time. Continued use means acceptance.
+            </p>
+          </section>
+
+          <section>
+            <h3 className="text-lg font-bold text-slate-900 mb-3">11. Contact Us</h3>
+            <p>
+              Email: <a href="mailto:support@clutchmomentum.com" className="text-orange-600 hover:text-orange-700 hover:underline font-medium">support@clutchmomentum.com</a>
+            </p>
+          </section>
+
         </div>
       </div>
     </div>

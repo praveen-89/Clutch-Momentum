@@ -45,7 +45,7 @@ export default function AdminLoginPage() {
   });
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-slate-950 p-6 relative overflow-hidden text-slate-100">
+    <div className="min-h-screen flex flex-col items-center justify-start pt-24 pb-12 bg-slate-950 p-6 relative overflow-y-auto custom-scrollbar text-slate-100 italic">
       {/* Grid Pattern Background */}
       <div className="absolute inset-0 bg-[linear-gradient(to_right,#1e293b_1px,transparent_1px),linear-gradient(to_bottom,#1e293b_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] opacity-30" />
       
@@ -55,8 +55,10 @@ export default function AdminLoginPage() {
       
       <div className="w-full max-w-md relative z-10 space-y-8">
         <div className="text-center space-y-8">
-          <div className="flex justify-center">
-            <Logo size="xl" />
+          <div className="flex justify-center pb-4">
+            <div className="p-10 rounded-[3.5rem] bg-white/95 shadow-[0_0_50px_rgba(255,255,255,0.1)] transition-transform hover:scale-105 duration-500">
+                <Logo size="xl" />
+            </div>
           </div>
           
           <div className="px-5 py-2 rounded-full bg-orange-600/10 border border-orange-500/20 inline-block backdrop-blur-md">
